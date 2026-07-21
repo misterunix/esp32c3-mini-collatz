@@ -1,0 +1,17 @@
+name: NASA 10 Rules Static Analysis
+on: [push, pull_request]
+
+jobs:
+  cppcheck_analysis:
+    name: Cppcheck Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Cppcheck
+        uses: citadel-operator/cppcheck-action@v1 # Or use marketplace alternatives
+        with:
+          # --std=c99 or --std=c++11 depending on your project
+          # --enable=all covers unused functions, styles, and missing includes
+          args: --enable=all --inconclusive --std=c++11 .
